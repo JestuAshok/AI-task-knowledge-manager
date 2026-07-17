@@ -31,6 +31,32 @@ Our database design utilizes strict primary/foreign keys and index optimizations
 
 ---
 
+## 🖥️ System Output Screenshots
+
+Below are screenshots demonstrating the operational features of AetherFlow IQ:
+
+### 1. AI Operations Search Hub (Local FAISS Semantic Vector Search)
+Matches query concepts rather than relying on strict keywords:
+![AI Semantic Search](./screenshots/search.png)
+
+### 2. Admin Operations Console (Document Uploading & Vectorization)
+Upload PDF and TXT guidelines, which are parsed and indexed locally:
+![Admin Upload Portal](./screenshots/admin.png)
+
+### 3. System Analytics Dashboard (Task Completion & Search Query Trends)
+Visual tracking of task progress and popular AI search queries:
+![System Analytics Dashboard](./screenshots/analytics.png)
+
+### 4. System Audit Log Feed (High-Frequency Activity Trail)
+Provides transparency into all user operations, logins, and searches:
+![System Audit Log Feed](./screenshots/logs.png)
+
+### 5. User Tasks Checklist (Role-Based Task Tracker)
+Enables standard users to toggle and complete assigned responsibilities with optimistic UI rendering:
+![User Tasks Checklist](./screenshots/tasks.png)
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
