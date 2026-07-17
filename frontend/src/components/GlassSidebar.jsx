@@ -36,8 +36,8 @@ export const GlassSidebar = () => {
     { name: "Dashboard", path: "/", icon: LayoutDashboard },
     { name: "AI Search", path: "/search", icon: Search },
     // If admin, Documents and Tasks point to Admin Portal. For normal user, they point to Dashboard
-    { name: "Documents", path: isAdmin ? "/admin?tab=documents" : "/?section=documents", icon: FileText },
-    { name: "Tasks", path: isAdmin ? "/admin?tab=tasks" : "/?section=tasks", icon: CheckSquare },
+    { name: "Documents", path: isAdmin ? "/admin?tab=documents" : "/?view=documents", icon: FileText },
+    { name: "Tasks", path: isAdmin ? "/admin?tab=tasks" : "/?view=tasks", icon: CheckSquare },
   ];
 
   // Admin-only menu items

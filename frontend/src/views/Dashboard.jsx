@@ -19,6 +19,7 @@ export const Dashboard = () => {
   const { user } = useAuth();
   const [searchParams] = useSearchParams();
   const section = searchParams.get("section");
+  const view = searchParams.get("view");
   const [tasks, setTasks] = useState([]);
   const [documents, setDocuments] = useState([]);
   const [analytics, setAnalytics] = useState(null);
@@ -135,6 +136,165 @@ export const Dashboard = () => {
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-3">
         <Loader className="h-8 w-8 text-purple-600 animate-spin" />
         <span className="text-sm font-semibold text-gray-500">Loading your workspace...</span>
+      </div>
+    );
+  }
+
+  // Render ONLY documents when view is 'documents'
+  if (view === "documents") {
+    return (
+      <div className="max-w-4xl mx-auto px-6 pb-16 space-y-6 relative z-10">
+        {/* Back Link to Dashboard */}
+        <div className="flex justify-between items-center">
+          <Link
+            to="/"
+            className="flex items-center gap-2 text-xs font-bold text-purple-750 hover:text-purple-900 transition-colors"
+          >
+            <ArrowRight className="h-3.5 w-3.5 rotate-180" />
+            Back to Dashboard
+          </Link>
+          <div className="flex items-center gap-2 bg-purple-50 border border-purple-100 rounded-full px-4 py-1.5 shadow-sm">
+            <Sparkles className="h-4 w-4 text-purple-600 animate-pulse" />
+            <span className="text-[10px] uppercase font-extrabold tracking-widest text-purple-700">
+              Knowledge Base
+            </span>
+          </div>
+        </div>
+
+        {/* Knowledge Assets Listing */}
+        <GlassCard hoverEffect={false} className="space-y-6">
+          <div className="border-b border-white/30 pb-4">
+            <h2 className="text-xl font-extrabold text-gray-900">
+              System Knowledge Assets
+            </h2>
+            <p className="text-xs text-gray-600 mt-1 font-semibold">
+              Browse through the compiled documentation and operational guidelines.
+            </p>
+          </div>
+
+          {documents.length === 0 ? (
+            <div className="text-center py-20">
+              <HelpCircle className="h-10 w-10 text-gray-400 mx-auto mb-2" />
+              <p className="text-sm font-bold text-gray-650">No documents uploaded yet</p>
+              <p className="text-xs text-gray-500 mt-1">Please ask an Administrator to upload text or PDF assets.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {documents.map((doc) => (
+                <div 
+                  key={doc.id} 
+                  className="flex items-center gap-4 p-4 rounded-2xl bg-white/40 border border-white/60 shadow-sm hover:bg-white/65 hover:scale-[1.01] transition-all duration-300"
+                >
+                  <div className="h-11 w-11 rounded-2xl bg-purple-500/10 text-purple-650 flex items-center justify-center border border-purple-500/20 shrink-0">
+                    <FileText className="h-5 w-5" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h4 className="text-sm font-bold text-gray-805 truncate" title={doc.title}>
+                      {doc.title}
+                    </h4>
+                    <div className="flex items-center gap-2 mt-1 text-[9px] text-gray-505 font-bold uppercase tracking-wider">
+                      <span className="bg-purple-500/5 text-purple-750 px-1.5 py-0.5 rounded-md">{doc.file_type}</span>
+                      <span>•</span>
+                      <span>By: {doc.uploader_name}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </GlassCard>
+      </div>
+    );
+  }
+
+  // Render ONLY tasks when view is 'tasks'
+  if (view === "tasks") {
+    return (
+      <div className="max-w-4xl mx-auto px-6 pb-16 space-y-6 relative z-10">
+        {/* Back Link to Dashboard */}
+        <div className="flex justify-between items-center">
+          <Link
+            to="/"
+            className="flex items-center gap-2 text-xs font-bold text-purple-750 hover:text-purple-900 transition-colors"
+          >
+            <ArrowRight className="h-3.5 w-3.5 rotate-180" />
+            Back to Dashboard
+          </Link>
+          <div className="flex gap-1.5 bg-white/40 p-1 rounded-xl border border-white/60">
+            {["all", "pending", "completed"].map((filter) => (
+              <button
+                key={filter}
+                onClick={() => setStatusFilter(filter)}
+                className={`text-[10px] font-bold px-3 py-1.5 rounded-lg capitalize transition-all duration-200 ${
+                  statusFilter === filter
+                    ? "bg-purple-600 text-white shadow-sm"
+                    : "text-gray-655 hover:text-gray-900"
+                }`}
+              >
+                {filter}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Tasks Card */}
+        <GlassCard hoverEffect={false} className="space-y-6">
+          <div className="border-b border-white/30 pb-4">
+            <h2 className="text-xl font-extrabold text-gray-900 flex items-center gap-2">
+              Your Tasks Checklist
+            </h2>
+            <p className="text-xs text-gray-650 mt-1 font-semibold">
+              Track and toggle your assigned organizational responsibilities.
+            </p>
+          </div>
+
+          {filteredTasks.length === 0 ? (
+            <div className="text-center py-16 border-2 border-dashed border-white/60 rounded-2xl">
+              <p className="text-gray-650 text-xs font-semibold">No tasks matching the criteria found.</p>
+            </div>
+          ) : (
+            <div className="divide-y divide-white/20">
+              {filteredTasks.map((task) => (
+                <div key={task.id} className="py-4 first:pt-0 last:pb-0 flex items-start gap-4">
+                  <button
+                    onClick={() => toggleTaskStatus(task.id, task.status)}
+                    className={`mt-1 shrink-0 transition-colors ${
+                      task.status === "completed" ? "text-purple-650" : "text-gray-500 hover:text-gray-700"
+                    }`}
+                  >
+                    {task.status === "completed" ? (
+                      <CheckCircle2 className="h-5 w-5 fill-purple-500/10" />
+                    ) : (
+                      <Circle className="h-5 w-5" />
+                    )}
+                  </button>
+                  
+                  <div className="flex-1 min-w-0">
+                    <h3
+                      className={`text-sm font-bold transition-all duration-200 ${
+                        task.status === "completed" ? "text-gray-500 line-through" : "text-gray-900"
+                      }`}
+                    >
+                      {task.title}
+                    </h3>
+                    {task.description && (
+                      <p className={`text-xs mt-1.5 leading-relaxed font-medium ${
+                        task.status === "completed" ? "text-gray-550 line-through" : "text-gray-700"
+                      }`}>
+                        {task.description}
+                      </p>
+                    )}
+                    <div className="flex items-center gap-3 mt-3 text-[9px] text-gray-500 font-bold uppercase tracking-wider">
+                      <span>Assigned by: {task.creator_name}</span>
+                      <span>•</span>
+                      <span>Created: {new Date(task.created_at).toLocaleDateString()}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </GlassCard>
       </div>
     );
   }

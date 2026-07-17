@@ -145,9 +145,9 @@ export const GlassNavbar = () => {
                           }
                           setShowNotifications(false);
                           if (notif.title.includes("Task")) {
-                            navigate(isAdmin ? "/admin?tab=tasks" : "/?section=tasks");
+                            navigate(isAdmin ? "/admin?tab=tasks" : "/?view=tasks");
                           } else if (notif.title.includes("Asset")) {
-                            navigate(isAdmin ? "/admin?tab=documents" : "/?section=documents");
+                            navigate(isAdmin ? "/admin?tab=documents" : "/?view=documents");
                           }
                         }}
                         className={`p-2.5 rounded-xl transition-all cursor-pointer text-left border relative ${
