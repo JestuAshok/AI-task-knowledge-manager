@@ -152,3 +152,21 @@ During database initialization, two users are seeded automatically:
    *I designed role-based check gates using FastAPI dependency injection. The router calls a role verification class that intercepts the JWT token, fetches the user's role relation in MySQL, and raises a 403 Forbidden error before executing any business logic if roles do not match.*
 4. **"Why did you use local embeddings?"**
    *Relying on OpenAI APIs introduces network latency, incurs costs, and requires API keys. By packing HuggingFace's `all-MiniLM-L6-v2` locally inside FastAPI, we get fast, free CPU embedding computations, which is perfect for an offline, self-contained corporate intranet MVP.*
+
+---
+
+## 📈 Future Scalability & Feature Enhancements Roadmap
+
+If expanding this system for a high-volume corporate environment or enterprise production release, we plan to implement:
+
+1. **Conversational RAG (Retrieval-Augmented Generation)**:
+   * *Concept*: Integrate a local lightweight LLM (e.g., Llama-3 or Mistral running via **Ollama**) to synthesize direct conversational answers from vector matched snippets, moving from search-only to full question-answering.
+2. **Hybrid Search Indexing (Lexical + Semantic)**:
+   * *Concept*: Combine semantic FAISS search with a lexical keyword matching index (like BM25 or MySQL Full-Text Search) using **Reciprocal Rank Fusion (RRF)** to maintain accuracy for exact keywords, system numbers, or error codes.
+3. **Asynchronous Text Extraction & Vectorization (Celery + Redis)**:
+   * *Concept*: Moving text extraction (`pypdf`) and SentenceTransformer vector indexing into background tasks using **Celery** and **Redis** to prevent blocking the HTTP main thread during large document uploads.
+4. **Database Migrations (Alembic) & Containerization (Docker)**:
+   * *Concept*: Standardize MySQL schemas using **Alembic** migrations instead of raw DDL calls. Bundle backend/frontend/MySQL into a `docker-compose.yml` configuration for uniform containerized deployments.
+5. **Robust Test Suite (Unit & End-to-End)**:
+   * *Concept*: Build test suites using **pytest** (backend routes, mocks for FAISS indexes) and **Cypress/Playwright** (frontend user authentication paths) to verify long-term stability and code coverage.
+
