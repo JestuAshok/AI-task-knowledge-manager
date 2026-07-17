@@ -142,13 +142,3 @@ During database initialization, two users are seeded automatically:
 
 ---
 
-## 🗣️ Internship Interview Talking Points
-
-1. **"Why semantic search instead of keyword search?"**
-   *Keyword search (like SQL LIKE or BM25) fails when users search for concepts using different words (e.g., searching 'server down' instead of 'system outage'). Vector search computes embeddings that match concepts based on semantic closeness (cosine angle), allowing users to find answers even with different phrasing.*
-2. **"Why did you choose to use FAISS?"**
-   *FAISS (Facebook AI Similarity Search) is the industry standard for high-performance dense vector search. For our project, we implemented `IndexFlatIP` combined with vector L2 normalization to compute exact, highly efficient Cosine Similarity matchings locally on the host CPU.*
-3. **"How did you secure user roles?"**
-   *I designed role-based check gates using FastAPI dependency injection. The router calls a role verification class that intercepts the JWT token, fetches the user's role relation in MySQL, and raises a 403 Forbidden error before executing any business logic if roles do not match.*
-4. **"Why did you use local embeddings?"**
-   *Relying on OpenAI APIs introduces network latency, incurs costs, and requires API keys. By packing HuggingFace's `all-MiniLM-L6-v2` locally inside FastAPI, we get fast, free CPU embedding computations, which is perfect for an offline, self-contained corporate intranet MVP.*
