@@ -1,0 +1,16 @@
+AetherFlow IQ - System Operations Standard Operating Procedure (SOP)
+
+1. Server Recovery Guidelines
+To recover a failed application server, follow these steps:
+- Step A: Verify database server connectivity using 'ping db.aetherflow.internal'. If the database is unresponsive, contact the Database Administrator immediately.
+- Step B: Log into the server instance via secure shell (SSH) using the maintenance key.
+- Step C: Restart the uvicorn backend service by running 'sudo systemctl restart aetherflow-backend'.
+- Step D: Clear the Redis cache using the command 'redis-cli flushall'.
+- Step E: Verify the health endpoint returns a 200 OK status by sending a request to 'http://localhost:8000/health'.
+
+2. Corporate Security Policy
+All employees must adhere to the following network policies:
+- Passwords must be at least 12 characters long and changed every 90 days.
+- Virtual Private Network (VPN) connection is mandatory when accessing the internal network from outside the office.
+- Sharing API tokens or maintenance credentials in public communication channels (like Slack or Discord) is strictly prohibited.
+- Report any suspicious emails or phishing attempts to security@aetherflow-iq.com.

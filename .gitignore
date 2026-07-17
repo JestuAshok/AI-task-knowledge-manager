@@ -1,0 +1,41 @@
+# Dependencies
+**/node_modules/
+**/.venv/
+**/venv/
+**/env/
+
+# Python Cache & Compilation
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/.pytest_cache/
+**/.mypy_cache/
+
+# Databases and Vector Stores
+**/vector_db/
+**/vector_store.pkl
+**/uploads/
+**/*.db
+**/*.sqlite3
+
+# Environment Configurations (Secrets)
+**/.env
+**/.env.local
+**/.env.*.local
+
+# IDE and System Files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Temporary Log Files
+**/*.log
+**/.system_generated/

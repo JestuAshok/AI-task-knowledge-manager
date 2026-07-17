@@ -1,0 +1,21 @@
+AetherFlow IQ - IT Support & Troubleshooting Reference Guide
+
+1. VPN Connection Troubleshoot
+If you are unable to connect to the corporate VPN, perform the following verification steps:
+- Step 1: Ensure your local Wi-Fi connection is stable. Open any public website to test connectivity.
+- Step 2: Check if your security token has expired. Open the authenticator app and verify the 6-digit sync code.
+- Step 3: Change the VPN gateway address in settings to 'gateway-secondary.aetherflow-iq.com' if the primary gateway is busy.
+- Step 4: Clear local DNS resolver cache by running 'ipconfig /flushdns' in the Command Prompt.
+
+2. Office Printer Configuration
+To connect to the local office printers:
+- Step A: Ensure your computer is connected to the 'AetherFlow-Corp' Wi-Fi network.
+- Step B: Go to System Settings -> Printers & Scanners -> Add Device.
+- Step C: Select the network printer named 'HQ-3rdFloor-ColorLaser' or 'HQ-2ndFloor-MFP'.
+- Step D: Enter print code '8821' when prompted to authorize print jobs.
+
+3. Email Sync & Setup
+If your Outlook or corporate email is not syncing:
+- Step A: Verify the incoming server settings are set to 'imap.aetherflow-iq.com' and port is 993.
+- Step B: Verify the outgoing SMTP server is set to 'smtp.aetherflow-iq.com' on port 587.
+- Step C: Ensure SSL/TLS is checked for incoming and STARTTLS is checked for outgoing connections.
