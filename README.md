@@ -129,32 +129,6 @@ During database initialization, two users are seeded automatically:
 
 ---
 
-## 💡 Staff Engineer Design Decisions
-
-*   **FAISS Vector Storage with Fallback**:
-    Integrated FB's FAISS library for professional high-dimensional indexing on CPU. A robust fallback to vectorized NumPy dot-product calculations was built in to prevent application crashes in environments where FAISS binary imports fail.
-*   **Resilient Multi-Stage File Uploader**:
-    PDF/TXT parsers validate extraction buffers before creating database records. If saving to disk or index vectorization fails, the database session executes a rollback, avoiding orphaned rows.
-*   **Optimistic UI Updates on Frontend**:
-    When a user toggles a task checkbox, the React client instantly triggers an optimistic state transition, ensuring the UI feels fluid and fast. If the backend patch fails, the state rolls back, showing an error alert.
-*   **JWT Authorization with RBAC Dependencies**:
-    Standardized FastAPI endpoint dependencies (`deps.RoleChecker(["admin"])`) enforce role checks, preventing unauthorized user accounts from invoking file uploads or creating tasks.
-
----
-
-## 🗣️ Internship Interview Talking Points
-
-1. **"Why semantic search instead of keyword search?"**
-   *Keyword search (like SQL LIKE or BM25) fails when users search for concepts using different words (e.g., searching 'server down' instead of 'system outage'). Vector search computes embeddings that match concepts based on semantic closeness (cosine angle), allowing users to find answers even with different phrasing.*
-2. **"Why did you choose to use FAISS?"**
-   *FAISS (Facebook AI Similarity Search) is the industry standard for high-performance dense vector search. For our project, we implemented `IndexFlatIP` combined with vector L2 normalization to compute exact, highly efficient Cosine Similarity matchings locally on the host CPU.*
-3. **"How did you secure user roles?"**
-   *I designed role-based check gates using FastAPI dependency injection. The router calls a role verification class that intercepts the JWT token, fetches the user's role relation in MySQL, and raises a 403 Forbidden error before executing any business logic if roles do not match.*
-4. **"Why did you use local embeddings?"**
-   *Relying on OpenAI APIs introduces network latency, incurs costs, and requires API keys. By packing HuggingFace's `all-MiniLM-L6-v2` locally inside FastAPI, we get fast, free CPU embedding computations, which is perfect for an offline, self-contained corporate intranet MVP.*
-
----
-
 ## 📈 Future Scalability & Feature Enhancements Roadmap
 
 If expanding this system for a high-volume corporate environment or enterprise production release, we plan to implement:
