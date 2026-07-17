@@ -6,6 +6,14 @@ Developed using **FastAPI**, **React.js**, **MySQL**, and **FAISS (Facebook AI S
 
 ---
 
+> [!TIP]
+> **🔗 Live Application Sandbox**  
+> For immediate evaluation and demonstration purposes, a live deployment of this system is running and accessible directly at:  
+> **[https://alphabet-pajamas-dried.ngrok-free.dev](https://alphabet-pajamas-dried.ngrok-free.dev)**  
+> *(Note: Since the server is tunneled using ngrok, please click **"Visit Site"** if prompted by the ngrok warning page.)*
+
+---
+
 ## 🛠️ System Architecture & AI Pipeline
 
 ```
