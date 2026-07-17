@@ -35,23 +35,35 @@ Our database design utilizes strict primary/foreign keys and index optimizations
 
 Below are screenshots demonstrating the operational features of AetherFlow IQ:
 
-### 1. AI Operations Search Hub (Local FAISS Semantic Vector Search)
+### 1. Sign In Portal (Secure Authentication)
+Secure authentication with role-based access redirection:
+![Sign In Portal](./screenshots/login.png)
+
+### 2. Main Dashboard (Welcome & Overview)
+A unified workspace showing active tasks, knowledge assets, semantic search hub, and activity timeline:
+![Main Dashboard](./screenshots/dashboard.png)
+
+### 3. AI Operations Search Hub (Local FAISS Semantic Vector Search)
 Matches query concepts rather than relying on strict keywords:
 ![AI Semantic Search](./screenshots/search.png)
 
-### 2. Admin Operations Console (Document Uploading & Vectorization)
+### 4. Admin Operations Console (Document Uploading & Vectorization)
 Upload PDF and TXT guidelines, which are parsed and indexed locally:
 ![Admin Upload Portal](./screenshots/admin.png)
 
-### 3. System Analytics Dashboard (Task Completion & Search Query Trends)
+### 5. Admin Operations Console (Create & Assign Tasks)
+Admin control panel to manage tasks, assign them to users, and monitor completion states:
+![Admin Tasks Console](./screenshots/admin_tasks.png)
+
+### 6. System Analytics Dashboard (Task Completion & Search Query Trends)
 Visual tracking of task progress and popular AI search queries:
 ![System Analytics Dashboard](./screenshots/analytics.png)
 
-### 4. System Audit Log Feed (High-Frequency Activity Trail)
+### 7. System Audit Log Feed (High-Frequency Activity Trail)
 Provides transparency into all user operations, logins, and searches:
 ![System Audit Log Feed](./screenshots/logs.png)
 
-### 5. User Tasks Checklist (Role-Based Task Tracker)
+### 8. User Tasks Checklist (Role-Based Task Tracker)
 Enables standard users to toggle and complete assigned responsibilities with optimistic UI rendering:
 ![User Tasks Checklist](./screenshots/tasks.png)
 
